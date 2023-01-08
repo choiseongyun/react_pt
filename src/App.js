@@ -1,20 +1,12 @@
 import React, {useState} from "react";
 import "./App.css";
+import Form from "./components/Form";
 import List from "./components/List"
 
 export default function App(){
 
   const [todoData,setTodoData] = useState([]);
   const [value, setValue] = useState("");
-
-  //해야 할 일 텍스트 입력 랜더링 함수
-  const handleChange = (e) =>{
-    setValue(e.target.value)
-    // this.setState({value: e.target.value })
-  }
-  
-
-  
   //submit 시 동작하는 함수
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +22,7 @@ export default function App(){
     setTodoData(prev =>[...prev, newTodo]);
     setValue("");
     // this.setState({value:""});
-  }
+  };
   
 
     return(
@@ -40,25 +32,9 @@ export default function App(){
             <h1>할 일 목록</h1>
           </div>
 
-          <List todoData={todoData} />
+          <List todoData={todoData} setTodoData={setTodoData}/>
           
-        <form style={{display:'flex'}} onSubmit={handleSubmit}>
-          <input 
-            type="text" 
-            name="value" 
-            style={{ flex:'10', padding:'5px'}}
-            placeholder="해야 할 일을 입력하세요."
-            value={value}
-            onChange={handleChange}
-          />
-          <input 
-            type="submit"
-            value="입력"
-            className="btn"
-            style={{ flex : '1' }}
-          />
-        </form>
-
+          <Form handleSubmit={handleSubmit} value={value} setValue={setValue}/>
         </div>
       </div>
     );
