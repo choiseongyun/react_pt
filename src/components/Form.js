@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Form({handleSubmit,value,setValue}) {
+  console.log("Form Component");
     //해야 할 일 텍스트 입력 랜더링 함수
   const handleChange = (e) =>{
     setValue(e.target.value)

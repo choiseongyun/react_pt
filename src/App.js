@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
 import "./App.css";
 import Form from "./components/Form";
-import List from "./components/List"
+import Lists from "./components/Lists";
 
 export default function App(){
-
+  console.log("App Component");
   const [todoData,setTodoData] = useState([]);
   const [value, setValue] = useState("");
   //submit 시 동작하는 함수
@@ -23,7 +23,13 @@ export default function App(){
     setValue("");
     // this.setState({value:""});
   };
-  
+    //할 일 리스트 삭제 함수
+    const handleClick = useCallback((id) =>{  
+      let newTodoData = todoData.filter(data => data.id !== id)
+      console.log("newTodoData", newTodoData);
+      // this.setState({todoData:newTodoData});
+      setTodoData(newTodoData);
+  },{todoData});
 
     return(
       <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
@@ -31,7 +37,7 @@ export default function App(){
           <div className="flex justify-between mb-3">
             <h1>할 일 목록</h1>
           </div>
-          <List todoData={todoData} setTodoData={setTodoData}/>
+          <Lists handleClick={handleClick} todoData={todoData} setTodoData={setTodoData}/>
           
           <Form handleSubmit={handleSubmit} value={value} setValue={setValue}/>
         </div>
