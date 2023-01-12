@@ -29,7 +29,7 @@ export default function App(){
       console.log("newTodoData", newTodoData);
       // this.setState({todoData:newTodoData});
       setTodoData(newTodoData);
-  },{todoData});
+  },[todoData]);
 
     return(
       <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
